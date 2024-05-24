@@ -1,0 +1,14 @@
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\bin\Debug\net8.0\BudgetUpdatorLibrary.deps.json
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\bin\Debug\net8.0\BudgetUpdatorLibrary.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\bin\Debug\net8.0\BudgetUpdatorLibrary.pdb
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.AssemblyInfoInputs.cache
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.AssemblyInfo.cs
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.csproj.CoreCompileInputs.cache
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\refint\BudgetUpdatorLibrary.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.pdb
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\ref\BudgetUpdatorLibrary.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.csproj.AssemblyReference.cache
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\bin\Debug\net8.0\BudgetUpdatorLibrary.runtimeconfig.json
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.genruntimeconfig.cache

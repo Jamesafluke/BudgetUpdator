@@ -1,0 +1,84 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\PersonalMyCode\\BudgetUpdator\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorlibrary\\updatebudget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|solutionrelative:budgetupdatorlibrary\\updatebudget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|solutionrelative:budgetupdatorui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|C:\\PersonalMyCode\\BudgetUpdator\\budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|solutionrelative:budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|solutionrelative:budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 360,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MenuForm.cs [Design]",
+              "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\MenuForm.cs",
+              "RelativeDocumentMoniker": "BudgetUpdatorUI\\MenuForm.cs",
+              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\MenuForm.cs [Design]",
+              "RelativeToolTip": "BudgetUpdatorUI\\MenuForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T17:24:08.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\Program.cs",
+              "RelativeDocumentMoniker": "BudgetUpdatorUI\\Program.cs",
+              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\Program.cs",
+              "RelativeToolTip": "BudgetUpdatorUI\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T22:04:04.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MenuForm.cs",
+              "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\MenuForm.cs",
+              "RelativeDocumentMoniker": "BudgetUpdatorUI\\MenuForm.cs",
+              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\MenuForm.cs",
+              "RelativeToolTip": "BudgetUpdatorUI\\MenuForm.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAwwGMAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T20:40:49.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UpdateBudget.cs",
+              "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\UpdateBudget.cs",
+              "RelativeDocumentMoniker": "BudgetUpdatorLibrary\\UpdateBudget.cs",
+              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\UpdateBudget.cs",
+              "RelativeToolTip": "BudgetUpdatorLibrary\\UpdateBudget.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T17:59:44.401Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
