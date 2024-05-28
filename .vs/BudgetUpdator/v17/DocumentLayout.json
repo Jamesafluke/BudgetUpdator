@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\PersonalMyCode\\BudgetUpdator\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorlibrary\\models\\budgetitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|solutionrelative:budgetupdatorlibrary\\models\\budgetitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorlibrary\\updatebudget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|solutionrelative:budgetupdatorlibrary\\updatebudget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,12 +27,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "BudgetItem.cs",
+              "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\Models\\BudgetItem.cs",
+              "RelativeDocumentMoniker": "BudgetUpdatorLibrary\\Models\\BudgetItem.cs",
+              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\Models\\BudgetItem.cs*",
+              "RelativeToolTip": "BudgetUpdatorLibrary\\Models\\BudgetItem.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T02:43:59.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "UpdateBudget.cs",
               "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\UpdateBudget.cs",
               "RelativeDocumentMoniker": "BudgetUpdatorLibrary\\UpdateBudget.cs",
-              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\UpdateBudget.cs*",
-              "RelativeToolTip": "BudgetUpdatorLibrary\\UpdateBudget.cs*",
-              "ViewState": "AQIAACwAAAAAAAAAAAA7wP8AAAAAAAAA",
+              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\UpdateBudget.cs",
+              "RelativeToolTip": "BudgetUpdatorLibrary\\UpdateBudget.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-27T12:16:12.866Z",
               "EditorCaption": ""
@@ -41,7 +58,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "BudgetUpdatorTests.cs",
               "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorTests\\BudgetUpdatorTests.cs",
               "RelativeDocumentMoniker": "BudgetUpdatorTests\\BudgetUpdatorTests.cs",
