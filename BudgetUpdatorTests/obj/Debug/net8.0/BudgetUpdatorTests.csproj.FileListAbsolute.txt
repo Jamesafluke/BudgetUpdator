@@ -168,3 +168,9 @@ C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\obj\Debug\net8.0\refint\Budge
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\obj\Debug\net8.0\BudgetUpdatorTests.pdb
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\obj\Debug\net8.0\BudgetUpdatorTests.genruntimeconfig.cache
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\obj\Debug\net8.0\ref\BudgetUpdatorTests.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\obj\Debug\net8.0\BudgetUpdatorTests.sourcelink.json
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\bin\Debug\net8.0\Castle.Core.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\bin\Debug\net8.0\Moq.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorTests\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll

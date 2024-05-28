@@ -12,3 +12,4 @@ C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\ref\Budget
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.csproj.AssemblyReference.cache
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\bin\Debug\net8.0\BudgetUpdatorLibrary.runtimeconfig.json
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.genruntimeconfig.cache
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorLibrary\obj\Debug\net8.0\BudgetUpdatorLibrary.sourcelink.json

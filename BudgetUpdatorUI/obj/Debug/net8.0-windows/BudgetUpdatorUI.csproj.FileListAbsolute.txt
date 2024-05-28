@@ -184,3 +184,4 @@ C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\bin\Debug\net8.0-windows\Microso
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Debug.dll
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.EventLog.dll
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.EventSource.dll
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.sourcelink.json

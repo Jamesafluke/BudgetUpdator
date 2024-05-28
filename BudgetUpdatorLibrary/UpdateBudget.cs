@@ -23,19 +23,17 @@ public class UpdateBudget
         //AddDummyData();
 
         //xlsx
-        UpdateDb(DeduplicateXlsxAndDb(ImportDataFromXlsx(), BudgetAccess.GetAllBudgetItems()));
-
+        ClearAndUpdateDb(DeduplicateXlsxAndDb(ImportDataFromXlsx(), BudgetAccess.GetAllBudgetItems()));
 
         //csv
-        //List<RawBudgetItem> csvBudgetRaw = ReadCsvs();
-        //List<BudgetItem> csvBudget = ConvertRawToBudget(csvBudgetRaw);
-
-
+        ClearAndUpdateDb(DeduplicateCsvAndDb(ConvertCsvBudgetItemsToBudgetItems(ReadCsvs()), BudgetAccess.GetAllBudgetItems()));
 
         UpdateXlsxFromDb();
     }
 
-    private void UpdateDb(List<BudgetItem> budgetItems)
+
+
+    private void ClearAndUpdateDb(List<BudgetItem> budgetItems)
     {
         BudgetAccess.ClearDb();
         foreach (var i in budgetItems)
@@ -46,6 +44,7 @@ public class UpdateBudget
 
     private void AddDummyData()
     {
+        _logger.LogInformation("Adding dummy data.");
         BudgetAccess.AddBudgetItem(budgetItem: new BudgetItem { Amount = 50.50M, Item = "F150", Method = "Rewards", Category = "James" });
         BudgetAccess.AddBudgetItem(budgetItem: new BudgetItem { Amount = 45.87M, Item = "Sewing machine", Method = "Rewards", Category = "Lexi" });
     }
@@ -69,6 +68,7 @@ public class UpdateBudget
                 {
                     var item = new BudgetItem()
                     {
+                        //When it comes in from Excel, a blank cell automatically becomes 0.
                         Id = (row.GetValue<int>("Id") == 0) ? null: row.GetValue<int>("Id"),
                         Date = row.GetValue<DateTime>("Date"),
                         Item = row.GetValue<string>("Item"),
@@ -92,84 +92,91 @@ public class UpdateBudget
                 finalBudgetItems.Add(i);
             }
         }
+        _logger.LogInformation($"Imported {finalBudgetItems.Count} items from xlsx.");
         return finalBudgetItems;
-        
     }
 
     public List<BudgetItem> DeduplicateXlsxAndDb(List<BudgetItem> budgetItems, List<BudgetItem> dbBudgetItems)
     {
+        _logger.LogInformation("Deduplicating xlsx and db.");
         var finalBudgetItems = dbBudgetItems;
         
         foreach (var i in budgetItems)
         {
-            if (i.Item != null && i.Id == 0)
+            if (i.Item != null && i.Id == null)
             {
-                //Item must be new because it doesn't have an Id yet, so add it.
+                //Item must be manually added to the xlsx because it doesn't have an Id yet, so add it to db.
                 finalBudgetItems.Add(i);
             }
-            else if (i.Item != null && i.Id != 0)
+            else if (i.Item != null && i.Id != null)
             {
-                //Iterate through. If there's a match by Id to an existing item, update it.
+                bool matchFound = false;
+                //Iterate through. The ID is expected to match and existing db item. Update it.
                 foreach (var j in dbBudgetItems)
                 {
                     if (i.Id == j.Id) {
-                        //If the item is in the db, update it.
+                        //If item is in the db, update it.
                         finalBudgetItems.Remove(j);
                         finalBudgetItems.Add(i);
+                        matchFound = true;
                         break;
-                    };
+                    }
                 }
-            }
-            else
-            {
-                //The row is empty, or there's no match in the existing db. Disregard.
+                if (!matchFound) 
+                { 
+                   //Throw an error because a dumb human decided to manually add an id to the xlsx.
+                }
             }
         }
         return finalBudgetItems;
     }
 
-    public List<RawBudgetItem> ReadCsvs()
+    public List<CsvBudgetItem> ReadCsvs()
     {
+        _logger.LogInformation("Reading csvs.");
         try
         {
             using (var reader = new StreamReader(Path.Combine(GlobalConfig.CsvPath, GlobalConfig.Csv1FileName)))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                List<RawBudgetItem> rawItems = csv.GetRecords<RawBudgetItem>().ToList();
-                return TrimToRecent(rawItems);
+                List<CsvBudgetItem> csvItems = csv.GetRecords<CsvBudgetItem>().ToList();
+                return TrimToRecent(csvItems);
             }
         }
         catch (Exception ex)
         {
             _logger.LogError($"Failed to import csv.");
-            return new List<RawBudgetItem>();
+            return new List<CsvBudgetItem>();
         }
     }
 
-    private static List<RawBudgetItem> TrimToRecent(List<RawBudgetItem> rawBudgetItems)
+    public List<CsvBudgetItem> TrimToRecent(List<CsvBudgetItem> csvBudgetItems)
     {
-        List<RawBudgetItem> recentItems = new List<RawBudgetItem>();
+        _logger.LogInformation("Trimming csv to recent items.");
+        List<CsvBudgetItem> recentItems = new List<CsvBudgetItem>();
         int currentMonth = DateTime.Today.Month;
         int currentYear = DateTime.Today.Year;
+        if(currentMonth == 1) { currentMonth = 12; currentYear--; }
         int lastMonth = currentMonth - 1;
-        int lastYear = currentYear - 1;
 
-        foreach (var item in rawBudgetItems)
+        foreach (var item in csvBudgetItems)
         {
             DateTime postDate = DateTime.Parse(item.PostDate);
             if((postDate.Month == currentMonth && postDate.Year == currentYear) ||
-                (postDate.Month == lastMonth && postDate.Year == lastYear))
+                (postDate.Month == lastMonth && postDate.Year == currentYear))
             {
                 recentItems.Add(item);
             }
         }
+        _logger.LogInformation($"Trimmed csv to {recentItems.Count} recent items.");
         return recentItems;
     }
 
-    private List<BudgetItem> ConvertRawToBudget(List<RawBudgetItem> rawBudgetItems)
+    public List<BudgetItem> ConvertCsvBudgetItemsToBudgetItems(List<CsvBudgetItem> csvBudgetItems)
     {
+        _logger.LogInformation("Converting csv items to budget items.");
         List<BudgetItem> budgetItems = new List<BudgetItem>();
-        foreach (var i in rawBudgetItems)
+        foreach (var i in csvBudgetItems)
         {
             BudgetItem item = new BudgetItem
             {
@@ -182,22 +189,64 @@ public class UpdateBudget
 
             if(i.AccountNumber == GlobalConfig.checkingAccountNumber) { item.Method = "Checking"; }
             else { item.Method = "Rewards"; }
+            budgetItems.Add(item);
         }
         return budgetItems;
     }
 
-    
+    public List<BudgetItem> DeduplicateCsvAndDb(List<BudgetItem> csvBudget, List<BudgetItem> dbBudgetItems)
+    {
+        _logger.LogInformation("Deduplicating csv and db.");
+        var finalBudgetItems = dbBudgetItems;
+
+        
+
+        foreach (var i in csvBudget)
+        {
+            bool isDuplicate = false;
+            foreach(var j in dbBudgetItems.ToList()) //Something is messing with the dbBudgetItems list, so we need to make a copy. No clue why and haven't researched. 5/27.
+            {
+                if(i.Date == j.Date && i.Amount == j.Amount)
+                {
+                    //It matches, so ignore it because we don't need to add it again.
+                    isDuplicate = true;
+                    break;
+                }
+                else
+                {
+                    //It doesn't match, so it's not a duplicate. 
+                }
+            }
+            if (!isDuplicate) { finalBudgetItems.Add(i); }
+        }
+        return finalBudgetItems;
+    }
 
     private void UpdateXlsxFromDb()
     {
+        _logger.LogInformation("Updating xlsx from db.");
         var budgetItems = BudgetAccess.GetAllBudgetItems();
         
+        var settings = SettingsAccess.GetSettings();
+        var month = DateTime.Today;
+        string selectedMonth = month.ToString("MMM");
+        if (settings.SelectPreviousMonth) { selectedMonth = DateTime.Today.AddMonths(-1).ToString("MMM"); }
+
+        var itemsToAdd = new List<BudgetItem>();
+        foreach (var i in budgetItems)
+        {
+            if (i.Date.Month == month.Month){ itemsToAdd.Add(i); }
+        }
+
+
+        _logger.LogInformation($"Updating xlsx sheet {selectedMonth} with {budgetItems.Count} items.");
+
         using (var package = new ExcelPackage(Path.Combine(GlobalConfig.xlsxPath, GlobalConfig.xlsxFileName)))
         {
-            foreach (var item in budgetItems)
+            foreach (var item in itemsToAdd)
             {
-                var worksheet = package.Workbook.Worksheets[DateTime.Today.ToString("MMM")];
-                worksheet.Cells["S8"].LoadFromCollection(budgetItems);
+                var worksheet = package.Workbook.Worksheets[(selectedMonth)];
+                worksheet.Cells["S8"].LoadFromCollection(itemsToAdd);
                 package.Save();
             }
         }

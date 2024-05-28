@@ -22,6 +22,8 @@ internal class Program
         static extern bool AllocConsole();
         AllocConsole();
 
+        
+
 
         IHostBuilder hostBuilder = new HostBuilder();
 
