@@ -19,7 +19,7 @@ namespace BudgetUpdatorLibrary.Migrations
 
             modelBuilder.Entity("BudgetUpdatorAppLibrary.BudgetItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -35,20 +35,11 @@ namespace BudgetUpdatorLibrary.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("ExportedToBudget")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Item")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("ManuallyAdded")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Method")
                         .HasColumnType("TEXT");

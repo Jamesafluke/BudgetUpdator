@@ -28,6 +28,7 @@ partial class MenuForm
     /// </summary>
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuForm));
         updateBudgetButton = new Button();
         splitAnItemButton = new Button();
@@ -61,6 +62,7 @@ partial class MenuForm
         downloadCsvsButton = new Button();
         dateStaticLabel = new Label();
         dateLabel = new Label();
+        timer1 = new System.Windows.Forms.Timer(components);
         menuStrip1.SuspendLayout();
         SuspendLayout();
         // 
@@ -323,6 +325,12 @@ partial class MenuForm
         dateLabel.TabIndex = 14;
         dateLabel.Text = "dateLabel";
         // 
+        // timer1
+        // 
+        timer1.Enabled = true;
+        timer1.Interval = 2000;
+        timer1.Tick += timer1_Tick;
+        // 
         // MenuForm
         // 
         AutoScaleDimensions = new SizeF(9F, 21F);
@@ -392,4 +400,5 @@ partial class MenuForm
     private ToolStripMenuItem refreshToolStripMenuItem;
     private ToolStripMenuItem listAllItemsToolStripMenuItem;
     private ToolStripMenuItem clearDatabaseToolStripMenuItem;
+    private System.Windows.Forms.Timer timer1;
 }

@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using Moq;
 
 [TestClass]
-public class BudgetUpdatorTests
+public class UpdateBudgetTests
 {
     [TestMethod]
     //Test that the category is changed.

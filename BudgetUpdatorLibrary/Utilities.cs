@@ -3,7 +3,7 @@
 namespace BudgetUpdatorLibrary;
 static public class Utilities
 {
-    static public bool XlsxIsOpen()
+    static public bool XlsxIsClosed()
     {
         try
         {
@@ -14,11 +14,11 @@ static public class Utilities
 
             s.Close();
 
-            return false;
+            return true;
         }
         catch (Exception)
         {
-            return true;
+            return false;
         }
     }
 

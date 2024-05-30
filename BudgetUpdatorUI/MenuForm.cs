@@ -1,16 +1,19 @@
 using BudgetUpdatorAppLibrary;
 using BudgetUpdatorLibrary;
 using Microsoft.Extensions.Logging;
+using System.Windows.Forms;
 
 namespace BudgetUpdatorUI;
 
 public partial class MenuForm : Form
 {
     private ILogger _logger;
+    UiRefresh uiRefresh = new UiRefresh();
+
+
     public MenuForm(ILogger<MenuForm> logger)
     {
         InitializeComponent();
-
 
         _logger = logger;
         logger.LogInformation("Loading MenuForm");
@@ -20,53 +23,24 @@ public partial class MenuForm : Form
 
     private void Menu_Load(object sender, EventArgs e)
     {
-        RefreshMenu();
+        timer1_Tick(sender, e);
     }
 
+    private void timer1_Tick(object sender, EventArgs e)
+    {
+        _logger.LogInformation("Tick.");
+        if (uiRefresh.AreChanges()){ RefreshMenu(); }
+    }
 
     private void RefreshMenu()
     {
-        _logger.LogInformation("Refreshing menu.");
+        _logger.LogTrace("Refreshing menu.");
 
-        if (Utilities.CsvsExist())
-        {
-            _logger.LogInformation("CSVs detected.");
-
-            updateBudgetButton.Enabled = true;
-            updateBudgetLabel.Text = "CSVs detected.";
-        }
-        else
-        {
-            _logger.LogInformation("No CSVs detected.");
-
-            updateBudgetButton.Enabled = false;
-            updateBudgetLabel.Text = "";
-        }
-        if (Utilities.XlsxIsOpen())
-        {
-            _logger.LogInformation("Xlsx is open.");
-
-            updateBudgetButton.Enabled = false;
-            updateBudgetLabel.Text = "Xslx is currently open.\nClose before Updating.";
-        }
-        else
-        {
-            updateBudgetButton.Enabled = true;
-            updateBudgetLabel.Text = "";
-        }
-
-        if (Utilities.PendingItemsExist())
-        {
-            completeItemsButton.Enabled = true;
-            completeItemsLabel.Text = "$5 items to complete.";
-            completeItemsLabel.ForeColor = Color.Black;
-        }
-        else
-        {
-            completeItemsButton.Enabled = false;
-            completeItemsLabel.Text = "All items completed.";
-            completeItemsLabel.ForeColor = Color.DarkGray;
-        }
+        downloadCsvsLabel.Text = uiRefresh.Model.DownloadCsvsLabelText;
+        updateBudgetButton.Enabled = uiRefresh.Model.UpdateBudgetButtonEnabled;
+        updateBudgetLabel.Text = uiRefresh.Model.UpdateBudgetLabelText;
+        completeItemsButton.Enabled = uiRefresh.Model.CompleteItemsButtonEnabled;
+        completeItemsLabel.Text = uiRefresh.Model.CompleteItemsLabelText;
 
         lastUpdateLabel.Text = Utilities.GetLastUpdatedTimeStamp();
 
@@ -144,4 +118,6 @@ public partial class MenuForm : Form
             RefreshMenu();
         }
     }
+
+
 }
