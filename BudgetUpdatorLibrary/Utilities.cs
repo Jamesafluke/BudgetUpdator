@@ -44,4 +44,14 @@ static public class Utilities
         return false;
     }
 
+    public static void DeleteCsvs()
+    {
+        File.Delete(Path.Combine(GlobalConfig.CsvPath, GlobalConfig.Csv1FileName));        
+        File.Delete(Path.Combine(GlobalConfig.CsvPath, GlobalConfig.Csv1FileName));        
+    }
+
+    public static void CompleteItems()
+    {
+
+    }
 }

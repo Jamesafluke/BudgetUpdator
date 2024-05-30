@@ -2,6 +2,7 @@ namespace BudgetUpdatorTests;
 
 using BudgetUpdatorAppLibrary;
 using BudgetUpdatorLibrary;
+using BudgetUpdatorLibrary.Models;
 using Castle.Core.Logging;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
@@ -130,6 +131,30 @@ public class UpdateBudgetTests
         //Check that amount become negative for a credit.
         Assert.AreEqual(expected[2].Amount, updateBudget.ConvertCsvBudgetItemsToBudgetItems(csvBudgetItems)[2].Amount);
 
+    }
+
+    [TestMethod]
+    public void HandleBudgetExceptionsTest1()
+    {
+        var mockLogger = new Mock<ILogger<UpdateBudget>>();
+
+        var budgetItems = new List<BudgetItem>
+        {
+            new BudgetItem { Date = DateTime.Parse("5/25/24"), Id = null,   Item = "F150",      Category = null, Method = "Rewards", Amount = 50.50M },
+            new BudgetItem { Date = DateTime.Parse("5/25/24"), Id = null,   Item = "Modelx",    Category = null, Method = "Rewards", Amount = 100.00M },
+        };
+
+        var itemExceptions = new List<ItemException>
+        {
+            new ItemException { Item = "F150", Remove = true },
+            new ItemException { Item = "Modelx", Description = "SUV", Category = "James" },
+        };
+
+
+        var updateBudget = new UpdateBudget(mockLogger.Object);
+
+        Assert.AreEqual(1, updateBudget.HandleBudgetExceptions(budgetItems, itemExceptions).Count);
+        Assert.IsTrue(updateBudget.HandleBudgetExceptions(budgetItems, itemExceptions).Any(x => x.Item == "Modelx"));
     }
 
     //Test that duplicates aren't copied and that db is source of authority for category.

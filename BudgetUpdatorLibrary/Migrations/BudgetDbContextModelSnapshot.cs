@@ -51,6 +51,29 @@ namespace BudgetUpdatorLibrary.Migrations
                     b.ToTable("BudgetItems");
                 });
 
+            modelBuilder.Entity("BudgetUpdatorLibrary.Models.ItemException", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Item")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Remove")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ItemExceptions");
+                });
+
             modelBuilder.Entity("BudgetUpdatorLibrary.SettingsConfig", b =>
                 {
                     b.Property<int>("Id")

@@ -53,6 +53,10 @@ partial class MenuForm
         recheckXLSXToolStripMenuItem = new ToolStripMenuItem();
         listAllItemsToolStripMenuItem = new ToolStripMenuItem();
         clearDatabaseToolStripMenuItem = new ToolStripMenuItem();
+        exceptionsToolStripMenuItem1 = new ToolStripMenuItem();
+        addExceptionToolStripMenuItem = new ToolStripMenuItem();
+        listExceptionsToolStripMenuItem = new ToolStripMenuItem();
+        removeExceptionToolStripMenuItem = new ToolStripMenuItem();
         updateBudgetLabel = new Label();
         completeItemsLabel = new Label();
         splitAnItemLabel = new Label();
@@ -103,7 +107,7 @@ partial class MenuForm
         // menuStrip1
         // 
         menuStrip1.ImageScalingSize = new Size(20, 20);
-        menuStrip1.Items.AddRange(new ToolStripItem[] { settingsToolStripMenuItem, itemsToolStripMenuItem });
+        menuStrip1.Items.AddRange(new ToolStripItem[] { settingsToolStripMenuItem, itemsToolStripMenuItem, exceptionsToolStripMenuItem1 });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
         menuStrip1.Size = new Size(510, 24);
@@ -154,6 +158,7 @@ partial class MenuForm
         deleteCSVsToolStripMenuItem.Name = "deleteCSVsToolStripMenuItem";
         deleteCSVsToolStripMenuItem.Size = new Size(136, 22);
         deleteCSVsToolStripMenuItem.Text = "Delete CSVs";
+        deleteCSVsToolStripMenuItem.Click += deleteCSVsToolStripMenuItem_Click;
         // 
         // aboutToolStripMenuItem
         // 
@@ -231,6 +236,34 @@ partial class MenuForm
         clearDatabaseToolStripMenuItem.Size = new Size(151, 22);
         clearDatabaseToolStripMenuItem.Text = "Clear database";
         clearDatabaseToolStripMenuItem.Click += clearDatabaseToolStripMenuItem_Click;
+        // 
+        // exceptionsToolStripMenuItem1
+        // 
+        exceptionsToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { addExceptionToolStripMenuItem, listExceptionsToolStripMenuItem, removeExceptionToolStripMenuItem });
+        exceptionsToolStripMenuItem1.Name = "exceptionsToolStripMenuItem1";
+        exceptionsToolStripMenuItem1.Size = new Size(76, 20);
+        exceptionsToolStripMenuItem1.Text = "Exceptions";
+        // 
+        // addExceptionToolStripMenuItem
+        // 
+        addExceptionToolStripMenuItem.Name = "addExceptionToolStripMenuItem";
+        addExceptionToolStripMenuItem.Size = new Size(180, 22);
+        addExceptionToolStripMenuItem.Text = "Add Exception";
+        addExceptionToolStripMenuItem.Click += addExceptionToolStripMenuItem_Click;
+        // 
+        // listExceptionsToolStripMenuItem
+        // 
+        listExceptionsToolStripMenuItem.Name = "listExceptionsToolStripMenuItem";
+        listExceptionsToolStripMenuItem.Size = new Size(180, 22);
+        listExceptionsToolStripMenuItem.Text = "List Exceptions";
+        listExceptionsToolStripMenuItem.Click += listExceptionsToolStripMenuItem_Click;
+        // 
+        // removeExceptionToolStripMenuItem
+        // 
+        removeExceptionToolStripMenuItem.Name = "removeExceptionToolStripMenuItem";
+        removeExceptionToolStripMenuItem.Size = new Size(180, 22);
+        removeExceptionToolStripMenuItem.Text = "Remove Exception";
+        removeExceptionToolStripMenuItem.Click += removeExceptionToolStripMenuItem_Click;
         // 
         // updateBudgetLabel
         // 
@@ -401,4 +434,8 @@ partial class MenuForm
     private ToolStripMenuItem listAllItemsToolStripMenuItem;
     private ToolStripMenuItem clearDatabaseToolStripMenuItem;
     private System.Windows.Forms.Timer timer1;
+    private ToolStripMenuItem exceptionsToolStripMenuItem1;
+    private ToolStripMenuItem listExceptionsToolStripMenuItem;
+    private ToolStripMenuItem addExceptionToolStripMenuItem;
+    private ToolStripMenuItem removeExceptionToolStripMenuItem;
 }

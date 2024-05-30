@@ -185,3 +185,6 @@ C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\bin\Debug\net8.0-windows\Microso
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.EventLog.dll
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.EventSource.dll
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.sourcelink.json
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.ExceptionForm.resources
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.SplitItemForm.resources
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.RemoveItemExceptionForm.resources

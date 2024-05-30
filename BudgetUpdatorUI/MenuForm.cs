@@ -1,5 +1,6 @@
 using BudgetUpdatorAppLibrary;
 using BudgetUpdatorLibrary;
+using BudgetUpdatorLibrary.DataAccess;
 using Microsoft.Extensions.Logging;
 using System.Windows.Forms;
 
@@ -9,7 +10,6 @@ public partial class MenuForm : Form
 {
     private ILogger _logger;
     UiRefresh uiRefresh = new UiRefresh();
-
 
     public MenuForm(ILogger<MenuForm> logger)
     {
@@ -28,8 +28,7 @@ public partial class MenuForm : Form
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-        _logger.LogInformation("Tick.");
-        if (uiRefresh.AreChanges()){ RefreshMenu(); }
+        if (uiRefresh.AreChanges()) { RefreshMenu(); }
     }
 
     private void RefreshMenu()
@@ -49,7 +48,8 @@ public partial class MenuForm : Form
 
     private void downloadCsvsButton_Click(object sender, EventArgs e)
     {
-
+        StartAhk startAhk = new StartAhk(_logger);
+        startAhk.LaunchAHK();
     }
 
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -74,14 +74,13 @@ public partial class MenuForm : Form
         var updateBudget = new UpdateBudget(_logger);
         updateBudget.Update();
 
-        BudgetAccess.GetAllBudgetItems();
+        //BudgetAccess.GetAllBudgetItems();
     }
-
-
 
     private void completeItemsButton_Click(object sender, EventArgs e)
     {
-
+        var completeItemsForm = new CompleteItemsForm();
+        completeItemsForm.Show();
     }
 
     private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -96,9 +95,8 @@ public partial class MenuForm : Form
         var budgetItems = BudgetAccess.GetAllBudgetItems();
         foreach (var i in budgetItems)
         {
-            Console.WriteLine($"{i.Id} {i.Item} {i.Description} {i.Method} {i.Category} {i.Amount}");
+            _logger.LogInformation($"    {i.Id} {i.Item} {i.Description} {i.Method} {i.Category} {i.Amount}");
         }
-        Console.WriteLine();
     }
 
     private void clearDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,7 +106,7 @@ public partial class MenuForm : Form
         {
             BudgetAccess.ClearDb();
         }
-        Console.WriteLine("Database cleared.\n");
+        _logger.LogInformation("Database cleared.\n");
     }
 
     private void MenuForm_KeyDown(object sender, KeyEventArgs e)
@@ -119,5 +117,40 @@ public partial class MenuForm : Form
         }
     }
 
+    private void deleteCSVsToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (Utilities.CsvsExist())
+        {
+            var result = MessageBox.Show("Are you sure you want to delete the CSVs?", "Confirmation", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                Utilities.DeleteCsvs();
+            }
+        }
+        else
+        {
+            MessageBox.Show("No CSVs to delete.");
+        }
+    }
 
+    private void addExceptionToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var exceptionForm = new ExceptionForm();
+        exceptionForm.Show();
+    }
+
+    private void listExceptionsToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        _logger.LogInformation("Listing all exceptions.");
+        foreach (var i in ItemExceptionAccess.GetItemExceptions())
+        {
+            _logger.LogInformation($"    {i.Id} {i.Item} {i.Description} {i.Category} {i.Remove}");
+        }
+    }
+
+    private void removeExceptionToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var removeItemExceptionForm = new RemoveItemExceptionForm();
+        removeItemExceptionForm.Show();
+    }
 }

@@ -1,10 +1,13 @@
 ﻿using BudgetUpdatorAppLibrary;
+using BudgetUpdatorLibrary.DataAccess;
+using BudgetUpdatorLibrary.Models;
 using CsvHelper;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
 using OfficeOpenXml.Interfaces.Drawing.Text;
 using System.Globalization;
+using System.Runtime.ExceptionServices;
 
 namespace BudgetUpdatorLibrary;
 public class UpdateBudget
@@ -19,19 +22,51 @@ public class UpdateBudget
     }
     public void Update()
     {
-
         //AddDummyData();
 
         //xlsx
         ClearAndUpdateDb(DeduplicateXlsxAndDb(ImportDataFromXlsx(), BudgetAccess.GetAllBudgetItems()));
 
         //csv
-        ClearAndUpdateDb(DeduplicateCsvAndDb(ConvertCsvBudgetItemsToBudgetItems(ReadCsvs()), BudgetAccess.GetAllBudgetItems()));
+        ClearAndUpdateDb(DeduplicateCsvAndDb(HandleBudgetExceptions(ConvertCsvBudgetItemsToBudgetItems(ReadCsvs()), ItemExceptionAccess.GetItemExceptions()), BudgetAccess.GetAllBudgetItems()));
 
         UpdateXlsxFromDb();
     }
 
+    public List<BudgetItem> HandleBudgetExceptions(List<BudgetItem> budgetItems, List<ItemException> exceptions)
+    {
+        _logger.LogInformation("Handling budget exceptions.");
+        int totalExceptions = 0;
+        int removalExceptions = 0;
+        int modifyExceptions = 0;
+        
+        foreach (var i in budgetItems.ToList())
+        {
+            foreach (var j in exceptions.ToList())
+            {
+                if (i.Item == j.Item)
+                {
+                    if (j.Remove)
+                    {
+                        budgetItems.Remove(i);
+                        removalExceptions++;
+                    }
+                    else
+                    {
+                        i.Description = j.Description;
+                        i.Category = j.Category;
+                        modifyExceptions++;
+                    }
+                    totalExceptions++;
+                }
+            }
+        }
 
+        _logger.LogInformation($"Removed {removalExceptions} items.");
+        _logger.LogInformation($"Modified {modifyExceptions} items.");
+        _logger.LogInformation($"Handled {totalExceptions} total exceptions.");
+        return budgetItems;
+    }
 
     private void ClearAndUpdateDb(List<BudgetItem> budgetItems)
     {
