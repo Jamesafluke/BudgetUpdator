@@ -44,7 +44,6 @@ public static class BudgetAccess
             List<BudgetItem> budgetItems = db.BudgetItems.ToList();
             return budgetItems;
         }
-        
     }
 
     public static void ClearDb()

@@ -10,6 +10,7 @@ public partial class MenuForm : Form
 {
     private ILogger _logger;
     UiRefresh uiRefresh = new UiRefresh();
+    CompleteItems completeItems = new CompleteItems();
 
     public MenuForm(ILogger<MenuForm> logger)
     {
@@ -73,8 +74,12 @@ public partial class MenuForm : Form
     {
         var updateBudget = new UpdateBudget(_logger);
         updateBudget.Update();
+        //UpdateCompleteItemsUi();
+    }
 
-        //BudgetAccess.GetAllBudgetItems();
+    private void UpdateCompleteItemsUi()
+    {
+        int incompleteItems = completeItems.GetIncompleteItemsCount();
     }
 
     private void completeItemsButton_Click(object sender, EventArgs e)

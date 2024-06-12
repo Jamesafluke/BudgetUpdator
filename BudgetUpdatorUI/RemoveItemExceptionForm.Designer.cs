@@ -28,6 +28,7 @@ partial class RemoveItemExceptionForm
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RemoveItemExceptionForm));
         idRadio = new RadioButton();
         itemRadio = new RadioButton();
         idBox = new TextBox();
@@ -96,6 +97,7 @@ partial class RemoveItemExceptionForm
         Controls.Add(idBox);
         Controls.Add(itemRadio);
         Controls.Add(idRadio);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "RemoveItemExceptionForm";
         Text = "RemoveItemExceptionForm";
         ResumeLayout(false);

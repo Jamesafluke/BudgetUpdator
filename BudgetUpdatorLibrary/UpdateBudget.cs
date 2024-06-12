@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
 using OfficeOpenXml.Interfaces.Drawing.Text;
+using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.ExceptionServices;
 
@@ -17,54 +18,73 @@ public class UpdateBudget
     {
         _logger = logger;
     }
-    public UpdateBudget()
-    {
-    }
+
     public void Update()
     {
+        var settings = SettingsAccess.GetSettings();
         //AddDummyData();
 
         //xlsx
-        ClearAndUpdateDb(DeduplicateXlsxAndDb(ImportDataFromXlsx(), BudgetAccess.GetAllBudgetItems()));
+        List<BudgetItem> importedFromXlsx = ImportDataFromXlsx();
+        List<BudgetItem> tempBudgetItems = DeduplicateXlsxAndDb(importedFromXlsx, BudgetAccess.GetAllBudgetItems());
+        ClearAndUpdateDb(tempBudgetItems);
 
         //csv
-        ClearAndUpdateDb(DeduplicateCsvAndDb(HandleBudgetExceptions(ConvertCsvBudgetItemsToBudgetItems(ReadCsvs()), ItemExceptionAccess.GetItemExceptions()), BudgetAccess.GetAllBudgetItems()));
+        tempBudgetItems = ConvertCsvBudgetItemsToBudgetItems(ReadCsvs());
+        tempBudgetItems = TrimToSelectedMonth(tempBudgetItems, settings, DateTime.Today);
+        tempBudgetItems = HandleBudgetExceptions(tempBudgetItems, ItemExceptionAccess.GetItemExceptions());
+        tempBudgetItems = DeduplicateCsvAndDb(tempBudgetItems, BudgetAccess.GetAllBudgetItems());
+        ClearAndUpdateDb(tempBudgetItems);
 
-        UpdateXlsxFromDb();
+        UpdateXlsxFromDb(importedFromXlsx.Count, settings);
+    }
+
+    public List<BudgetItem> TrimToSelectedMonth(List<BudgetItem> budgetItems, SettingsConfig settings, DateTime today)
+    {
+        _logger.LogInformation($"Trimming to selected month");
+        List<BudgetItem> trimmedItems = new List<BudgetItem>();
+        DateTime selectedMonth;
+        if (settings.SelectPreviousMonth) { selectedMonth = today.AddMonths(-1); }
+        else { selectedMonth = today; }
+
+        foreach (var item in budgetItems)
+        {
+            if(item.Date.Month == selectedMonth.Month)
+            {
+                trimmedItems.Add(item);
+            }
+        }
+        return trimmedItems;
     }
 
     public List<BudgetItem> HandleBudgetExceptions(List<BudgetItem> budgetItems, List<ItemException> exceptions)
     {
         _logger.LogInformation("Handling budget exceptions.");
-        int totalExceptions = 0;
-        int removalExceptions = 0;
-        int modifyExceptions = 0;
-        
-        foreach (var i in budgetItems.ToList())
+        int removalExceptionsCount = 0;
+        int modifyExceptionsCount = 0;
+
+        foreach (var budgetItem in budgetItems.ToList())
         {
-            foreach (var j in exceptions.ToList())
+            foreach (var exception in exceptions.ToList())
             {
-                if (i.Item == j.Item)
+                if (budgetItem.Item == exception.Item)
                 {
-                    if (j.Remove)
+                    if (exception.Remove)
                     {
-                        budgetItems.Remove(i);
-                        removalExceptions++;
+                        budgetItems.Remove(budgetItem);
+                        removalExceptionsCount++;
                     }
                     else
                     {
-                        i.Description = j.Description;
-                        i.Category = j.Category;
-                        modifyExceptions++;
+                        budgetItem.Description = exception.Description;
+                        budgetItem.Category = exception.Category;
+                        modifyExceptionsCount++;
                     }
-                    totalExceptions++;
                 }
             }
         }
 
-        _logger.LogInformation($"Removed {removalExceptions} items.");
-        _logger.LogInformation($"Modified {modifyExceptions} items.");
-        _logger.LogInformation($"Handled {totalExceptions} total exceptions.");
+        _logger.LogInformation($"Removed {removalExceptionsCount}, Modified {modifyExceptionsCount}. Total of {removalExceptionsCount + modifyExceptionsCount}.");
         return budgetItems;
     }
 
@@ -94,29 +114,37 @@ public class UpdateBudget
 
         var budgetItems = new List<BudgetItem>();
 
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-        using (var package = new ExcelPackage(Path.Combine(GlobalConfig.xlsxPath, GlobalConfig.xlsxFileName)))
+        ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+        try
         {
-            var worksheet = package.Workbook.Worksheets[currentMonth.ToString("MMM")];
-            budgetItems = worksheet.Cells["S7:Y199"].ToCollectionWithMappings<BudgetItem>(
-                row =>
-                {
-                    var item = new BudgetItem()
+            using (var package = new ExcelPackage(Path.Combine(GlobalConfig.xlsxPath, GlobalConfig.xlsxFileName)))
+            {
+                var worksheet = package.Workbook.Worksheets[currentMonth.ToString("MMM")];
+                budgetItems = worksheet.Cells["S7:Y199"].ToCollectionWithMappings<BudgetItem>(
+                    row =>
                     {
-                        //When it comes in from Excel, a blank cell automatically becomes 0.
-                        Id = (row.GetValue<int>("Id") == 0) ? null: row.GetValue<int>("Id"),
-                        Date = row.GetValue<DateTime>("Date"),
-                        Item = row.GetValue<string>("Item"),
-                        Description = row.GetValue<string>("Description"),
-                        Method = row.GetValue<string>("Method"),
-                        Category = row.GetValue<string>("Category"),
-                        Amount = row.GetValue<decimal>("Amount"),
-                    };
+                        var item = new BudgetItem()
+                        {
+                            //When it comes in from Excel, a blank cell automatically becomes 0.
+                            Id = (row.GetValue<int>("Id") == 0) ? null: row.GetValue<int>("Id"),
+                            Date = row.GetValue<DateTime>("Date"),
+                            Item = row.GetValue<string>("Item"),
+                            Description = row.GetValue<string>("Description"),
+                            Method = row.GetValue<string>("Method"),
+                            Category = row.GetValue<string>("Category"),
+                            Amount = row.GetValue<decimal>("Amount"),
+                        };
 
-                    _logger.LogTrace($"{item.Id}, {item.Date}, {item.Item}, {item.Description}, {item.Method}, {item.Category}, {item.Amount}");
-                    return item;
-                },
-                options => options.HeaderRow = 0);
+                        _logger.LogTrace($"{item.Id}, {item.Date}, {item.Item}, {item.Description}, {item.Method}, {item.Category}, {item.Amount}");
+                        return item;
+                    },
+                    options => options.HeaderRow = 0);
+                    
+            }
+        }
+        catch
+        {
+            _logger.LogError("Importing data from xlsx failed. Make sure the worksheet exists.");
         }
         var finalBudgetItems = new List<BudgetItem>();
         foreach (var i in budgetItems)
@@ -168,24 +196,48 @@ public class UpdateBudget
 
     public List<CsvBudgetItem> ReadCsvs()
     {
-        _logger.LogInformation("Reading csvs.");
+        _logger.LogInformation($"Reading {GlobalConfig.Csv1FileName}.");
+        var csvItems = new List<CsvBudgetItem>();
+        var finalCsvItems = new List<CsvBudgetItem>();
         try
         {
             using (var reader = new StreamReader(Path.Combine(GlobalConfig.CsvPath, GlobalConfig.Csv1FileName)))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                List<CsvBudgetItem> csvItems = csv.GetRecords<CsvBudgetItem>().ToList();
-                return TrimToRecent(csvItems);
+                csvItems = csv.GetRecords<CsvBudgetItem>().ToList();
+                finalCsvItems.AddRange(csvItems);
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Failed to import csv.");
+            _logger.LogError($"Failed to import {GlobalConfig.Csv1FileName}.");
             return new List<CsvBudgetItem>();
         }
+        
+        _logger.LogInformation($"$Reading {GlobalConfig.Csv2FileName}.");
+        try
+        {
+            using (var reader = new StreamReader(Path.Combine(GlobalConfig.CsvPath, GlobalConfig.Csv2FileName)))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                csvItems = csv.GetRecords<CsvBudgetItem>().ToList();
+                finalCsvItems.AddRange(csvItems);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Failed to import {GlobalConfig.Csv2FileName}.");
+            return new List<CsvBudgetItem>();
+        }
+        return TrimCsvToRecent(finalCsvItems);
     }
 
-    public List<CsvBudgetItem> TrimToRecent(List<CsvBudgetItem> csvBudgetItems)
+    /// <summary>
+    /// Trim down to just current month and previous month.
+    /// </summary>
+    /// <param name="csvBudgetItems"></param>
+    /// <returns></returns>
+    public List<CsvBudgetItem> TrimCsvToRecent(List<CsvBudgetItem> csvBudgetItems)
     {
         _logger.LogInformation("Trimming csv to recent items.");
         List<CsvBudgetItem> recentItems = new List<CsvBudgetItem>();
@@ -207,10 +259,33 @@ public class UpdateBudget
         return recentItems;
     }
 
+    public List<BudgetItem> TrimBudgetItemToRecent(List<BudgetItem> budgetItems)//Do I even need this?
+    {
+        _logger.LogInformation("Trimming recent items.");
+        List<BudgetItem> recentItems = new List<BudgetItem>();
+        int currentMonth = DateTime.Today.Month;
+        int currentYear = DateTime.Today.Year;
+        if(currentMonth == 1) { currentMonth = 12; currentYear--; }
+        int lastMonth = currentMonth - 1;
+
+        foreach (var item in budgetItems)
+        {
+            if((item.Date.Month == currentMonth && item.Date.Year == currentYear) ||
+                (item.Date.Month == lastMonth && item.Date.Year == currentYear))
+            {
+                recentItems.Add(item);
+            }
+        }
+        _logger.LogInformation($"Trimmed to {recentItems.Count} recent items.");
+        return recentItems;
+    }
+
     public List<BudgetItem> ConvertCsvBudgetItemsToBudgetItems(List<CsvBudgetItem> csvBudgetItems)
     {
         _logger.LogInformation("Converting csv items to budget items.");
         List<BudgetItem> budgetItems = new List<BudgetItem>();
+        int checkingAddCount = 0;
+        int rewardsAddCount = 0;
         foreach (var i in csvBudgetItems)
         {
             BudgetItem item = new BudgetItem
@@ -222,10 +297,12 @@ public class UpdateBudget
             if (i.Debit.Length > 0) { item.Amount = decimal.Parse(i.Debit); }
             else { item.Amount = decimal.Parse(i.Credit) * -1; }
 
-            if(i.AccountNumber == GlobalConfig.checkingAccountNumber) { item.Method = "Checking"; }
-            else { item.Method = "Rewards"; }
+            if(i.AccountNumber == GlobalConfig.checkingAccountNumber) { item.Method = "Checking"; checkingAddCount++; }
+            else { item.Method = "Rewards"; rewardsAddCount++; }
             budgetItems.Add(item);
         }
+        _logger.LogInformation($"{checkingAddCount} items are from Checking.");
+        _logger.LogInformation($"{rewardsAddCount} items are from Rewards.");
         return budgetItems;
     }
 
@@ -257,12 +334,11 @@ public class UpdateBudget
         return finalBudgetItems;
     }
 
-    private void UpdateXlsxFromDb()
+    private void UpdateXlsxFromDb(int importedFromXlsxCount, SettingsConfig settings)
     {
         _logger.LogInformation("Updating xlsx from db.");
         var budgetItems = BudgetAccess.GetAllBudgetItems();
         
-        var settings = SettingsAccess.GetSettings();
         var month = DateTime.Today;
         string selectedMonth = month.ToString("MMM");
         if (settings.SelectPreviousMonth) { selectedMonth = DateTime.Today.AddMonths(-1).ToString("MMM"); }
@@ -273,8 +349,9 @@ public class UpdateBudget
             if (i.Date.Month == month.Month){ itemsToAdd.Add(i); }
         }
 
+        int newItemsCount = importedFromXlsxCount - itemsToAdd.Count;
 
-        _logger.LogInformation($"Updating xlsx sheet {selectedMonth} with {budgetItems.Count} items.");
+        _logger.LogInformation($"Updating xlsx sheet {selectedMonth} with {itemsToAdd.Count} items. {newItemsCount} net new.");
 
         using (var package = new ExcelPackage(Path.Combine(GlobalConfig.xlsxPath, GlobalConfig.xlsxFileName)))
         {

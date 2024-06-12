@@ -188,3 +188,4 @@ C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetU
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.ExceptionForm.resources
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.SplitItemForm.resources
 C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.RemoveItemExceptionForm.resources
+C:\PersonalMyCode\BudgetUpdator\BudgetUpdatorUI\obj\Debug\net8.0-windows\BudgetUpdatorUI.CompleteItemsForm.resources

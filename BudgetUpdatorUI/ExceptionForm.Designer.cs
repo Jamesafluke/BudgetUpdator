@@ -28,6 +28,7 @@ partial class ExceptionForm
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExceptionForm));
         createButton = new Button();
         itemBox = new TextBox();
         categoryBox = new TextBox();
@@ -144,6 +145,7 @@ partial class ExceptionForm
         Controls.Add(itemBox);
         Controls.Add(createButton);
         Font = new Font("Segoe UI", 10F);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "ExceptionForm";
         Text = "Create Exception";
         ResumeLayout(false);

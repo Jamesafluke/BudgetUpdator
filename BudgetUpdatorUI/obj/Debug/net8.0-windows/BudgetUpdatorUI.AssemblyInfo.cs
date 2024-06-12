@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BudgetUpdatorUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0fdcc220ce54ee5a7b5fe69bd2029da8e87ff816")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+671ad64938fec4e71dea5c3fef01dd8eda2084be")]
 [assembly: System.Reflection.AssemblyProductAttribute("BudgetUpdatorUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BudgetUpdatorUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

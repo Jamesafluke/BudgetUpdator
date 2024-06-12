@@ -50,8 +50,4 @@ static public class Utilities
         File.Delete(Path.Combine(GlobalConfig.CsvPath, GlobalConfig.Csv1FileName));        
     }
 
-    public static void CompleteItems()
-    {
-
-    }
 }
