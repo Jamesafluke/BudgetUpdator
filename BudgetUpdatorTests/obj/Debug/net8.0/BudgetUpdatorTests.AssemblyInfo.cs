@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BudgetUpdatorTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c0606c970f11e1802006f9edd7c6447f7503a0c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+891aae6cc3a2b1d7b23e45b691a06375a1b36c65")]
 [assembly: System.Reflection.AssemblyProductAttribute("BudgetUpdatorTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BudgetUpdatorTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -78,6 +78,7 @@ public class CompleteItems
             BudgetAccess.UpdateBudgetItem(budgetItem);
         }
         _stagedItems.Clear();
+        
     }
 
     public int GetCounter()

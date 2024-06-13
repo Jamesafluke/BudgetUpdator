@@ -9,8 +9,7 @@ public class UiRefreshTests
     //Test that they're NOT equal.
     public void AreEqualTest1()
     {
-        var completeItems = new CompleteItems();
-        var uiRefresh = new UiRefresh(completeItems);
+        var uiRefresh = new UiRefresh();
 
         UiRefreshModel model = new UiRefreshModel();
         UiRefreshModel tempModel = new UiRefreshModel();
@@ -37,8 +36,7 @@ public class UiRefreshTests
     //Test that they're equal.
     public void AreEqualTest2()
     {
-        var completeItems = new CompleteItems();
-        var uiRefresh = new UiRefresh(completeItems);
+        var uiRefresh = new UiRefresh();
 
         UiRefreshModel model = new UiRefreshModel();
         UiRefreshModel tempModel = new UiRefreshModel();

@@ -38,12 +38,6 @@ static public class Utilities
         return "Never";
     }
 
-    static public bool PendingItemsExist()
-    {
-        //TODO CheckForCompleteItems
-        return false;
-    }
-
     public static void DeleteCsvs()
     {
         File.Delete(Path.Combine(GlobalConfig.CsvPath, GlobalConfig.Csv1FileName));        

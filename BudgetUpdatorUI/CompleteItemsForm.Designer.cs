@@ -141,7 +141,7 @@ partial class CompleteItemsForm
         // 
         descriptionStaticLabel.AutoSize = true;
         descriptionStaticLabel.BackColor = Color.White;
-        descriptionStaticLabel.Location = new Point(79, 189);
+        descriptionStaticLabel.Location = new Point(80, 241);
         descriptionStaticLabel.Margin = new Padding(4, 0, 4, 0);
         descriptionStaticLabel.Name = "descriptionStaticLabel";
         descriptionStaticLabel.Size = new Size(89, 21);
@@ -152,7 +152,7 @@ partial class CompleteItemsForm
         // 
         categoryStaticLabel.AutoSize = true;
         categoryStaticLabel.BackColor = Color.White;
-        categoryStaticLabel.Location = new Point(79, 238);
+        categoryStaticLabel.Location = new Point(80, 195);
         categoryStaticLabel.Margin = new Padding(4, 0, 4, 0);
         categoryStaticLabel.Name = "categoryStaticLabel";
         categoryStaticLabel.Size = new Size(73, 21);
@@ -183,10 +183,10 @@ partial class CompleteItemsForm
         // 
         // descriptionBox
         // 
-        descriptionBox.Location = new Point(198, 186);
+        descriptionBox.Location = new Point(199, 238);
         descriptionBox.Name = "descriptionBox";
         descriptionBox.Size = new Size(265, 29);
-        descriptionBox.TabIndex = 0;
+        descriptionBox.TabIndex = 1;
         // 
         // skipButton
         // 
@@ -212,10 +212,10 @@ partial class CompleteItemsForm
         // 
         // categoryBox
         // 
-        categoryBox.Location = new Point(198, 235);
+        categoryBox.Location = new Point(199, 192);
         categoryBox.Name = "categoryBox";
         categoryBox.Size = new Size(265, 29);
-        categoryBox.TabIndex = 1;
+        categoryBox.TabIndex = 0;
         // 
         // CompleteItemsForm
         // 

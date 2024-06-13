@@ -16,7 +16,7 @@ public class UpdateBudget
     private ILogger _logger;
     public UpdateBudget(ILogger logger)
     {
-             _logger = logger;
+        _logger = logger;
     }
 
     public void Update()
@@ -49,7 +49,7 @@ public class UpdateBudget
 
         foreach (var item in budgetItems)
         {
-            if(item.Date.Month == selectedMonth.Month)
+            if (item.Date.Month == selectedMonth.Month)
             {
                 trimmedItems.Add(item);
             }
@@ -126,7 +126,7 @@ public class UpdateBudget
                         var item = new BudgetItem()
                         {
                             //When it comes in from Excel, a blank cell automatically becomes 0.
-                            Id = (row.GetValue<int>("Id") == 0) ? null: row.GetValue<int>("Id"),
+                            Id = (row.GetValue<int>("Id") == 0) ? null : row.GetValue<int>("Id"),
                             Date = row.GetValue<DateTime>("Date"),
                             Item = row.GetValue<string>("Item"),
                             Description = row.GetValue<string>("Description"),
@@ -139,7 +139,7 @@ public class UpdateBudget
                         return item;
                     },
                     options => options.HeaderRow = 0);
-                    
+
             }
         }
         catch
@@ -150,7 +150,7 @@ public class UpdateBudget
         foreach (var i in budgetItems)
         {
             //if(i.Id == 0) { i.Id = null; }
-            if(i.Item != null)
+            if (i.Item != null)
             {
                 finalBudgetItems.Add(i);
             }
@@ -159,35 +159,38 @@ public class UpdateBudget
         return finalBudgetItems;
     }
 
-    public List<BudgetItem> DeduplicateXlsxAndDb(List<BudgetItem> budgetItems, List<BudgetItem> dbBudgetItems)
+    public List<BudgetItem> DeduplicateXlsxAndDb(List<BudgetItem> xlsxBudgetItems, List<BudgetItem> dbBudgetItems)
     {
         _logger.LogInformation("Deduplicating xlsx and db.");
         var finalBudgetItems = dbBudgetItems;
-        
-        foreach (var i in budgetItems)
+
+        foreach (var xlsxBudgetItem in xlsxBudgetItems)
         {
-            if (i.Item != null && i.Id == null)
+            if (xlsxBudgetItem.Item != null && xlsxBudgetItem.Id == null)
             {
-                //Item must be manually added to the xlsx because it doesn't have an Id yet, so add it to db.
-                finalBudgetItems.Add(i);
+                //Item must have been manually added to the xlsx because it doesn't have an Id yet, so add it to db.
+                finalBudgetItems.Add(xlsxBudgetItem);
             }
-            else if (i.Item != null && i.Id != null)
+            else if (xlsxBudgetItem.Item != null && xlsxBudgetItem.Id != null)
             {
                 bool matchFound = false;
                 //Iterate through. The ID is expected to match and existing db item. Update it.
-                foreach (var j in dbBudgetItems)
+                foreach (var dbBudgetItem in dbBudgetItems)
                 {
-                    if (i.Id == j.Id) {
+                    if (xlsxBudgetItem.Id == dbBudgetItem.Id)
+                    {
                         //If item is in the db, update it.
-                        finalBudgetItems.Remove(j);
-                        finalBudgetItems.Add(i);
+                        //xlsxBudgetItem.Category = dbBudgetItem.Category;
+                        //xlsxBudgetItem.Description = dbBudgetItem.Description;
+                        finalBudgetItems.Remove(dbBudgetItem);
+                        finalBudgetItems.Add(xlsxBudgetItem);
                         matchFound = true;
                         break;
                     }
                 }
-                if (!matchFound) 
-                { 
-                   //Throw an error because a dumb human decided to manually add an id to the xlsx.
+                if (!matchFound)
+                {
+                    //Throw an error because a dumb human decided to manually add an id to the xlsx.
                 }
             }
         }
@@ -213,7 +216,7 @@ public class UpdateBudget
             _logger.LogError($"Failed to import {GlobalConfig.Csv1FileName}.");
             return new List<CsvBudgetItem>();
         }
-        
+
         _logger.LogInformation($"$Reading {GlobalConfig.Csv2FileName}.");
         try
         {
@@ -243,13 +246,13 @@ public class UpdateBudget
         List<CsvBudgetItem> recentItems = new List<CsvBudgetItem>();
         int currentMonth = DateTime.Today.Month;
         int currentYear = DateTime.Today.Year;
-        if(currentMonth == 1) { currentMonth = 12; currentYear--; }
+        if (currentMonth == 1) { currentMonth = 12; currentYear--; }
         int lastMonth = currentMonth - 1;
 
         foreach (var item in csvBudgetItems)
         {
             DateTime postDate = DateTime.Parse(item.PostDate);
-            if((postDate.Month == currentMonth && postDate.Year == currentYear) ||
+            if ((postDate.Month == currentMonth && postDate.Year == currentYear) ||
                 (postDate.Month == lastMonth && postDate.Year == currentYear))
             {
                 recentItems.Add(item);
@@ -265,12 +268,12 @@ public class UpdateBudget
         List<BudgetItem> recentItems = new List<BudgetItem>();
         int currentMonth = DateTime.Today.Month;
         int currentYear = DateTime.Today.Year;
-        if(currentMonth == 1) { currentMonth = 12; currentYear--; }
+        if (currentMonth == 1) { currentMonth = 12; currentYear--; }
         int lastMonth = currentMonth - 1;
 
         foreach (var item in budgetItems)
         {
-            if((item.Date.Month == currentMonth && item.Date.Year == currentYear) ||
+            if ((item.Date.Month == currentMonth && item.Date.Year == currentYear) ||
                 (item.Date.Month == lastMonth && item.Date.Year == currentYear))
             {
                 recentItems.Add(item);
@@ -297,7 +300,7 @@ public class UpdateBudget
             if (i.Debit.Length > 0) { item.Amount = decimal.Parse(i.Debit); }
             else { item.Amount = decimal.Parse(i.Credit) * -1; }
 
-            if(i.AccountNumber == GlobalConfig.checkingAccountNumber) { item.Method = "Checking"; checkingAddCount++; }
+            if (i.AccountNumber == GlobalConfig.checkingAccountNumber) { item.Method = "Checking"; checkingAddCount++; }
             else { item.Method = "Rewards"; rewardsAddCount++; }
             budgetItems.Add(item);
         }
@@ -311,14 +314,14 @@ public class UpdateBudget
         _logger.LogInformation("Deduplicating csv and db.");
         var finalBudgetItems = dbBudgetItems;
 
-        
+
 
         foreach (var i in csvBudget)
         {
             bool isDuplicate = false;
-            foreach(var j in dbBudgetItems.ToList()) //Something is messing with the dbBudgetItems list, so we need to make a copy. No clue why and haven't researched. 5/27.
+            foreach (var j in dbBudgetItems.ToList()) //Something is messing with the dbBudgetItems list, so we need to make a copy. No clue why and haven't researched. 5/27.
             {
-                if(i.Date == j.Date && i.Amount == j.Amount)
+                if (i.Date == j.Date && i.Amount == j.Amount)
                 {
                     //It matches, so ignore it because we don't need to add it again.
                     isDuplicate = true;
@@ -338,7 +341,7 @@ public class UpdateBudget
     {
         _logger.LogInformation("Updating xlsx from db.");
         var budgetItems = BudgetAccess.GetAllBudgetItems();
-        
+
         var month = DateTime.Today;
         string selectedMonth = month.ToString("MMM");
         if (settings.SelectPreviousMonth) { selectedMonth = DateTime.Today.AddMonths(-1).ToString("MMM"); }
@@ -346,7 +349,7 @@ public class UpdateBudget
         var itemsToAdd = new List<BudgetItem>();
         foreach (var i in budgetItems)
         {
-            if (i.Date.Month == month.Month){ itemsToAdd.Add(i); }
+            if (i.Date.Month == month.Month) { itemsToAdd.Add(i); }
         }
 
         int newItemsCount = importedFromXlsxCount - itemsToAdd.Count;

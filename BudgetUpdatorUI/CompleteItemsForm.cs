@@ -35,7 +35,7 @@ public partial class CompleteItemsForm : Form
         descriptionBox.Text = "";
         categoryBox.Text = "";
         infoLabel.Text = "";
-        descriptionBox.Focus();
+        categoryBox.Focus();
     }
 
     private void doneButton_Click(object sender, EventArgs e)
