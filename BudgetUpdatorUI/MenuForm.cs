@@ -8,10 +8,8 @@ namespace BudgetUpdatorUI;
 
 public partial class MenuForm : Form
 {
-    private ILogger _logger;
+    static private ILogger _logger;
     UiRefresh uiRefresh = new UiRefresh();
-    CompleteItems completeItems = new CompleteItems();
-
     public MenuForm(ILogger<MenuForm> logger)
     {
         InitializeComponent();
@@ -20,6 +18,7 @@ public partial class MenuForm : Form
         logger.LogInformation("Loading MenuForm");
 
         downloadCsvsLabel.Text = "";
+        UiRefresh uiRefresh = new UiRefresh();
     }
 
     private void Menu_Load(object sender, EventArgs e)
@@ -79,12 +78,13 @@ public partial class MenuForm : Form
 
     private void UpdateCompleteItemsUi()
     {
-        int incompleteItems = completeItems.GetIncompleteItemsCount();
+        throw new NotImplementedException();
     }
 
     private void completeItemsButton_Click(object sender, EventArgs e)
     {
         var completeItemsForm = new CompleteItemsForm();
+        completeItemsForm.FormClosed += CompleteItemsFormClosed;
         completeItemsForm.Show();
     }
 
@@ -157,5 +157,11 @@ public partial class MenuForm : Form
     {
         var removeItemExceptionForm = new RemoveItemExceptionForm();
         removeItemExceptionForm.Show();
+    }
+
+    private void CompleteItemsFormClosed(object sender, FormClosedEventArgs e)
+    {
+        _logger.LogInformation($"Form closed.");
+        RefreshMenu();
     }
 }

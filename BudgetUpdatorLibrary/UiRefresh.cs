@@ -7,6 +7,7 @@ public class UiRefresh
 {
     public UiRefreshModel Model = new UiRefreshModel();
     private UiRefreshModel _tempModel = new UiRefreshModel();
+    CompleteItems completeItems = CompleteItems.GetCompleteItems();
 
     public bool AreChanges()
     {
@@ -50,10 +51,10 @@ public class UiRefresh
         if (Utilities.XlsxIsClosed()) { _tempModel.UpdateBudgetLabelText = ""; }
         else { _tempModel.UpdateBudgetLabelText = "Xlsx is open."; }
 
-        if (Utilities.PendingItemsExist()) { _tempModel.CompleteItemsButtonEnabled = true; }
+        if (completeItems.IncompleteItemsExist()) { _tempModel.CompleteItemsButtonEnabled = true; }
         else { _tempModel.CompleteItemsButtonEnabled = false; }
 
-        if (Utilities.PendingItemsExist()) { _tempModel.CompleteItemsLabelText = "Pending Items Exist."; }
+        if (completeItems.IncompleteItemsExist()) { _tempModel.CompleteItemsLabelText = "Pending Items Exist."; }
         else { _tempModel.CompleteItemsLabelText = ""; }
     }
 }

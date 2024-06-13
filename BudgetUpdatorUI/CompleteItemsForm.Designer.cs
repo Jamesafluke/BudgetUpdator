@@ -42,9 +42,9 @@ partial class CompleteItemsForm
         infoLabel = new Label();
         splitButton = new Button();
         descriptionBox = new TextBox();
-        categoryBox = new TextBox();
         skipButton = new Button();
         doneButton = new Button();
+        categoryBox = new TextBox();
         SuspendLayout();
         // 
         // completeCountLabel
@@ -55,7 +55,7 @@ partial class CompleteItemsForm
         completeCountLabel.Location = new Point(95, 9);
         completeCountLabel.Margin = new Padding(4, 0, 4, 0);
         completeCountLabel.Name = "completeCountLabel";
-        completeCountLabel.Size = new Size(206, 28);
+        completeCountLabel.Size = new Size(169, 21);
         completeCountLabel.TabIndex = 0;
         completeCountLabel.Text = "completeCountLabel";
         // 
@@ -67,7 +67,7 @@ partial class CompleteItemsForm
         itemStaticLabel.Location = new Point(32, 9);
         itemStaticLabel.Margin = new Padding(4, 0, 4, 0);
         itemStaticLabel.Name = "itemStaticLabel";
-        itemStaticLabel.Size = new Size(55, 28);
+        itemStaticLabel.Size = new Size(45, 21);
         itemStaticLabel.TabIndex = 1;
         itemStaticLabel.Text = "Item";
         // 
@@ -78,7 +78,7 @@ partial class CompleteItemsForm
         dateStaticLabel.Location = new Point(79, 64);
         dateStaticLabel.Margin = new Padding(4, 0, 4, 0);
         dateStaticLabel.Name = "dateStaticLabel";
-        dateStaticLabel.Size = new Size(53, 28);
+        dateStaticLabel.Size = new Size(42, 21);
         dateStaticLabel.TabIndex = 2;
         dateStaticLabel.Text = "Date";
         // 
@@ -89,7 +89,7 @@ partial class CompleteItemsForm
         dateLabel.Location = new Point(170, 64);
         dateLabel.Margin = new Padding(4, 0, 4, 0);
         dateLabel.Name = "dateLabel";
-        dateLabel.Size = new Size(97, 28);
+        dateLabel.Size = new Size(77, 21);
         dateLabel.TabIndex = 3;
         dateLabel.Text = "dateLabel";
         // 
@@ -100,7 +100,7 @@ partial class CompleteItemsForm
         itemLabel.Location = new Point(170, 92);
         itemLabel.Margin = new Padding(4, 0, 4, 0);
         itemLabel.Name = "itemLabel";
-        itemLabel.Size = new Size(65, 28);
+        itemLabel.Size = new Size(52, 21);
         itemLabel.TabIndex = 5;
         itemLabel.Text = "label1";
         // 
@@ -111,7 +111,7 @@ partial class CompleteItemsForm
         label2.Location = new Point(79, 92);
         label2.Margin = new Padding(4, 0, 4, 0);
         label2.Name = "label2";
-        label2.Size = new Size(51, 28);
+        label2.Size = new Size(41, 21);
         label2.TabIndex = 4;
         label2.Text = "Item";
         // 
@@ -122,7 +122,7 @@ partial class CompleteItemsForm
         amountLabel.Location = new Point(170, 120);
         amountLabel.Margin = new Padding(4, 0, 4, 0);
         amountLabel.Name = "amountLabel";
-        amountLabel.Size = new Size(65, 28);
+        amountLabel.Size = new Size(52, 21);
         amountLabel.TabIndex = 7;
         amountLabel.Text = "label3";
         // 
@@ -133,7 +133,7 @@ partial class CompleteItemsForm
         label4.Location = new Point(79, 120);
         label4.Margin = new Padding(4, 0, 4, 0);
         label4.Name = "label4";
-        label4.Size = new Size(83, 28);
+        label4.Size = new Size(66, 21);
         label4.TabIndex = 6;
         label4.Text = "Amount";
         // 
@@ -144,7 +144,7 @@ partial class CompleteItemsForm
         descriptionStaticLabel.Location = new Point(79, 189);
         descriptionStaticLabel.Margin = new Padding(4, 0, 4, 0);
         descriptionStaticLabel.Name = "descriptionStaticLabel";
-        descriptionStaticLabel.Size = new Size(112, 28);
+        descriptionStaticLabel.Size = new Size(89, 21);
         descriptionStaticLabel.TabIndex = 8;
         descriptionStaticLabel.Text = "Description";
         // 
@@ -155,7 +155,7 @@ partial class CompleteItemsForm
         categoryStaticLabel.Location = new Point(79, 238);
         categoryStaticLabel.Margin = new Padding(4, 0, 4, 0);
         categoryStaticLabel.Name = "categoryStaticLabel";
-        categoryStaticLabel.Size = new Size(92, 28);
+        categoryStaticLabel.Size = new Size(73, 21);
         categoryStaticLabel.TabIndex = 8;
         categoryStaticLabel.Text = "Category";
         // 
@@ -166,18 +166,17 @@ partial class CompleteItemsForm
         infoLabel.Location = new Point(79, 305);
         infoLabel.Margin = new Padding(4, 0, 4, 0);
         infoLabel.Name = "infoLabel";
-        infoLabel.Size = new Size(92, 28);
+        infoLabel.Size = new Size(74, 21);
         infoLabel.TabIndex = 8;
         infoLabel.Text = "infoLabel";
         // 
         // splitButton
         // 
-        splitButton.Enabled = false;
         splitButton.Location = new Point(406, 366);
         splitButton.Margin = new Padding(4);
         splitButton.Name = "splitButton";
         splitButton.Size = new Size(156, 48);
-        splitButton.TabIndex = 5;
+        splitButton.TabIndex = 4;
         splitButton.Text = "Spli&t";
         splitButton.UseVisualStyleBackColor = true;
         splitButton.Click += splitButton_Click;
@@ -186,49 +185,48 @@ partial class CompleteItemsForm
         // 
         descriptionBox.Location = new Point(198, 186);
         descriptionBox.Name = "descriptionBox";
-        descriptionBox.Size = new Size(265, 34);
+        descriptionBox.Size = new Size(265, 29);
         descriptionBox.TabIndex = 0;
-        // 
-        // categoryBox
-        // 
-        categoryBox.Location = new Point(198, 235);
-        categoryBox.Name = "categoryBox";
-        categoryBox.Size = new Size(265, 34);
-        categoryBox.TabIndex = 1;
         // 
         // skipButton
         // 
-        skipButton.Enabled = false;
         skipButton.Location = new Point(242, 366);
         skipButton.Margin = new Padding(4);
         skipButton.Name = "skipButton";
         skipButton.Size = new Size(156, 48);
-        skipButton.TabIndex = 9;
+        skipButton.TabIndex = 3;
         skipButton.Text = "&Skip";
         skipButton.UseVisualStyleBackColor = true;
         skipButton.Click += skipButton_Click;
         // 
         // doneButton
         // 
-        doneButton.Enabled = false;
         doneButton.Location = new Point(79, 366);
         doneButton.Margin = new Padding(4);
         doneButton.Name = "doneButton";
         doneButton.Size = new Size(156, 48);
-        doneButton.TabIndex = 10;
+        doneButton.TabIndex = 2;
         doneButton.Text = "&Done";
         doneButton.UseVisualStyleBackColor = true;
         doneButton.Click += doneButton_Click;
         // 
+        // categoryBox
+        // 
+        categoryBox.Location = new Point(198, 235);
+        categoryBox.Name = "categoryBox";
+        categoryBox.Size = new Size(265, 29);
+        categoryBox.TabIndex = 1;
+        // 
         // CompleteItemsForm
         // 
-        AutoScaleDimensions = new SizeF(11F, 28F);
+        AcceptButton = doneButton;
+        AutoScaleDimensions = new SizeF(9F, 21F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.White;
         ClientSize = new Size(649, 446);
+        Controls.Add(categoryBox);
         Controls.Add(doneButton);
         Controls.Add(skipButton);
-        Controls.Add(categoryBox);
         Controls.Add(descriptionBox);
         Controls.Add(splitButton);
         Controls.Add(infoLabel);
@@ -247,6 +245,7 @@ partial class CompleteItemsForm
         Margin = new Padding(4, 6, 4, 6);
         Name = "CompleteItemsForm";
         Text = "Complete Items";
+        FormClosed += CompleteItemsForm_FormClosed;
         ResumeLayout(false);
         PerformLayout();
     }
@@ -266,7 +265,7 @@ partial class CompleteItemsForm
     private Label infoLabel;
     private Button splitButton;
     private TextBox descriptionBox;
-    private TextBox categoryBox;
     private Button skipButton;
     private Button doneButton;
+    private TextBox categoryBox;
 }
