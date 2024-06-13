@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\PersonalMyCode\\BudgetUpdator\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|solutionrelative:budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|solutionrelative:budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorlibrary\\updatebudget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|solutionrelative:budgetupdatorlibrary\\updatebudget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7FF55FC4-DC6B-479F-AC86-1E1D826AABF2}|BudgetUpdatorTests\\BudgetUpdatorTests.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatortests\\updatebudgettests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FF55FC4-DC6B-479F-AC86-1E1D826AABF2}|BudgetUpdatorTests\\BudgetUpdatorTests.csproj|solutionrelative:budgetupdatortests\\updatebudgettests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0253A501-8626-42B7-821D-84CC02A415B4}|BudgetUpdatorUI\\BudgetUpdatorUI.csproj|solutionrelative:budgetupdatorui\\menuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{36D68E31-4300-4473-9AA4-CB31D9589884}|BudgetUpdatorLibrary\\BudgetUpdatorLibrary.csproj|c:\\personalmycode\\budgetupdator\\budgetupdatorlibrary\\completeitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,11 +30,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 494,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "MenuForm.cs [Design]",
+              "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\MenuForm.cs",
+              "RelativeDocumentMoniker": "BudgetUpdatorUI\\MenuForm.cs",
+              "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\MenuForm.cs [Design]",
+              "RelativeToolTip": "BudgetUpdatorUI\\MenuForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-13T16:10:56.844Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MenuForm.cs",
               "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorUI\\MenuForm.cs",
               "RelativeDocumentMoniker": "BudgetUpdatorUI\\MenuForm.cs",
@@ -43,13 +59,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "UpdateBudget.cs",
               "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\UpdateBudget.cs",
               "RelativeDocumentMoniker": "BudgetUpdatorLibrary\\UpdateBudget.cs",
               "ToolTip": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\UpdateBudget.cs",
               "RelativeToolTip": "BudgetUpdatorLibrary\\UpdateBudget.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-13T15:17:44.11Z",
               "EditorCaption": ""
@@ -64,10 +80,10 @@
       "FloatingWindowState": {
         "Id": "88d5d567-1a8e-450d-a95c-26d4dbb9d73c",
         "Display": 0,
-        "X": 2073,
-        "Y": 227,
-        "Width": 1426,
-        "Height": 1063,
+        "X": 1715,
+        "Y": 0,
+        "Width": 1730,
+        "Height": 1397,
         "WindowState": 0
       },
       "DocumentGroups": [
@@ -77,7 +93,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "UpdateBudgetTests.cs",
               "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorTests\\UpdateBudgetTests.cs",
               "RelativeDocumentMoniker": "BudgetUpdatorTests\\UpdateBudgetTests.cs",
@@ -90,7 +106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CompleteItems.cs",
               "DocumentMoniker": "C:\\PersonalMyCode\\BudgetUpdator\\BudgetUpdatorLibrary\\CompleteItems.cs",
               "RelativeDocumentMoniker": "BudgetUpdatorLibrary\\CompleteItems.cs",
@@ -98,8 +114,7 @@
               "RelativeToolTip": "BudgetUpdatorLibrary\\CompleteItems.cs",
               "ViewState": "AQIAACUAAAAAAAAAAAAmwFAAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T15:15:18.222Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T15:15:18.222Z"
             }
           ]
         }
